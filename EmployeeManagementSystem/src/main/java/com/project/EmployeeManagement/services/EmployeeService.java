@@ -1,62 +1,25 @@
 package com.project.EmployeeManagement.services;
 
 import com.project.EmployeeManagement.entities.Employee;
-import com.project.EmployeeManagement.dao.EmployeeRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class EmployeeService {
+public interface EmployeeService {
 
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
-    private final EmployeeRepository employeeRepository;
+    Employee addEmployee(Employee employee);
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    Employee updateEmployee(Employee employee);
 
-    public Employee addEmployee(Employee employee) {
-        logger.info("Adding employee: {}", employee.getEmail() );
-        return employeeRepository.save(employee);
-    }
+    void deleteEmployeeById(Long employeeId);
 
-    public Employee updateEmployee(Employee employee) {
-        logger.info("Updating employee with id: {}", employee.getId());
-        return employeeRepository.save(employee);
-    }
+    Optional<Employee> getEmployeeById(Long employeeId);
 
-    public void deleteEmployeeById(Long employeeId) {
-        logger.info("Deleting employee with id: {}", employeeId);
-        employeeRepository.deleteById(employeeId);
-    }
+    List<Employee> getAllEmployees();
 
-    public Optional<Employee> getEmployeeById(Long employeeId) {
-        logger.info("Fetching employee with id: {}", employeeId);
-        return employeeRepository.findById(employeeId);
-    }
+    List<Employee> findEmployeesByDepartment(String department);
 
-    public List<Employee> getAllEmployees() {
-        logger.info("Fetching all employees");
-        return employeeRepository.findAll();
-    }
+    List<Employee> findEmployeesByJobTitle(String jobTitle);
 
-    public List<Employee> findEmployeesByDepartment(String department) {
-        logger.info("Finding employees by department: {}", department);
-        return employeeRepository.findByDepartmentIgnoreCase(department);
-    }
-
-    public List<Employee> findEmployeesByJobTitle(String jobTitle) {
-        logger.info("Finding employees by job title: {}", jobTitle);
-        return employeeRepository.findByJobTitleIgnoreCase(jobTitle);
-    }
-
-    public List<Employee> searchEmployeesByName(String name) {
-        logger.info("Searching employees by name: {}", name);
-        return employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name);
-    }
+    List<Employee> searchEmployeesByName(String name);
 }
-
