@@ -3,8 +3,6 @@ package com.project.EmployeeManagement.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.project.EmployeeManagement.entities.Employee;
@@ -22,7 +20,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByJobTitleIgnoreCase(String jobTitle);
 
     //Search employees by first or last name
-    @Query("SELECT e FROM Employee e WHERE LOWER(e.firstName) LIKE LOWER(CONCAT('%', :name, '%')) OR LOWER(e.lastName) LIKE LOWER(CONCAT('%', :name, '%'))")
-    List<Employee> findByFirstOrLastName(@Param("name") String name);
-
+    List<Employee> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
 }
