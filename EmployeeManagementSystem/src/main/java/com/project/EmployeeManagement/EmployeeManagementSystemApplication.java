@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableJpaAuditing
+@EnableJpaAuditing // for CreatedDate and LastModifiedDate
 public class EmployeeManagementSystemApplication {
 
 	public static void main(String[] args) {
