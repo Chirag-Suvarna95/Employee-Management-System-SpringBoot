@@ -34,6 +34,29 @@ public class EmployeeService {
         employeeRepository.deleteById(employeeId);
     }
 
-   
+    public Optional<Employee> getEmployeeById(Long employeeId) {
+        logger.info("Fetching employee with id: {}", employeeId);
+        return employeeRepository.findById(employeeId);
+    }
+
+    public List<Employee> getAllEmployees() {
+        logger.info("Fetching all employees");
+        return employeeRepository.findAll();
+    }
+
+    public List<Employee> findEmployeesByDepartment(String department) {
+        logger.info("Finding employees by department: {}", department);
+        return employeeRepository.findByDepartmentIgnoreCase(department);
+    }
+
+    public List<Employee> findEmployeesByJobTitle(String jobTitle) {
+        logger.info("Finding employees by job title: {}", jobTitle);
+        return employeeRepository.findByJobTitleIgnoreCase(jobTitle);
+    }
+
+    public List<Employee> searchEmployeesByName(String name) {
+        logger.info("Searching employees by name: {}", name);
+        return employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name);
+    }
 }
 
