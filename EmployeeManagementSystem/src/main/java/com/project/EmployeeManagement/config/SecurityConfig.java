@@ -11,21 +11,24 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 public class SecurityConfig {
 
+    // Security rules for HTTP requests
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())  // Disable CSRF for REST API
+            .csrf(csrf -> csrf.disable()) // Disable CSRF for APIs
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().authenticated()  // Require authentication for all endpoints
+                .requestMatchers("/employees/**").hasAnyRole("ADMIN", "MANAGER", "EMPLOYEE") // accessible to all roles
+                .requestMatchers("/employees/**").hasAnyRole("ADMIN", "MANAGER") // write actions require ADMIN or MANAGER
+                .anyRequest().authenticated()
             )
-            .httpBasic();  // Enable HTTP Basic authentication
+            .httpBasic(); // Enable HTTP Basic auth
 
         return http.build();
     }
 
-    // In-memory users for testing with different roles
+    // In-memory user details for testing
     @Bean
-    UserDetailsService userDetailsService() {
+    public UserDetailsService users() {
         return new InMemoryUserDetailsManager(
             User.withDefaultPasswordEncoder()
                 .username("admin")
@@ -45,4 +48,3 @@ public class SecurityConfig {
         );
     }
 }
-

@@ -2,6 +2,7 @@ package com.project.EmployeeManagement.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,8 @@ public class EmployeeController {
 	@PostMapping
 	public ResponseEntity<Employee> addEmployee(@RequestBody Employee emp) {
 		Employee savedEmp = employeeServiceImpl.addEmployee(emp);
-		return ResponseEntity.ok(savedEmp);
+		return ResponseEntity.status(HttpStatus.CREATED).body(savedEmp);
+
 	}
 
 	// Update existing employee
