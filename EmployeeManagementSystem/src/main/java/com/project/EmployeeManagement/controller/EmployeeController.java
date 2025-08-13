@@ -29,7 +29,7 @@ public class EmployeeController {
 		return this.employeeServiceImpl.getEmployeeById(id);
 	}
 
-	@PostMapping("/employees")
+	@PostMapping("/employee")
 	public Employee addEmployee(@RequestBody Employee emp) {
 		return employeeServiceImpl.addEmployee(emp);
 	}
