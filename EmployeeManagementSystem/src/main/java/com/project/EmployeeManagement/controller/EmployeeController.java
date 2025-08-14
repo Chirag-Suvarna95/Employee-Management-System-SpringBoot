@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
 import com.project.EmployeeManagement.entities.Employee;
 import com.project.EmployeeManagement.services.EmployeeServiceImpl;
 
@@ -79,4 +80,24 @@ public class EmployeeController {
 	public ResponseEntity<List<Employee>> searchByName(@RequestParam String name) {
 		return ResponseEntity.ok(employeeServiceImpl.searchEmployeesByName(name));
 	}
+	
+	//department wise stats -> dname, count, salary
+	@GetMapping("/reports/department-stats")
+	public ResponseEntity<List<EmployeeStatsDTO>> getDepartmentStats() {
+	    return ResponseEntity.ok(employeeServiceImpl.getDepartmentWiseStats());
+	}
+
+
+	@GetMapping("/reports/total")
+	public ResponseEntity<Long> getTotalEmployees() {
+	    return ResponseEntity.ok(employeeServiceImpl.getTotalEmployees());
+	}
+
+	@GetMapping("/reports/highest-salary")
+	public ResponseEntity<List<Employee>> getHighestSalaryEmployees() {
+	    return ResponseEntity.ok(employeeServiceImpl.getHighestPaidEmployees());
+	}
+
+	
+	
 }
