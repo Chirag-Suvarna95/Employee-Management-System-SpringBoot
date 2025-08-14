@@ -3,8 +3,10 @@ package com.project.EmployeeManagement.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
 import com.project.EmployeeManagement.entities.Employee;
 
 /*Repository interface for Employee, this Inherits CRUD operations from JpaRepository*/
@@ -21,4 +23,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	// Search employees by first or last name
 	List<Employee> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
+
+	
+	@Query("SELECT new EmployeeStatsDTO(e.department, COUNT(e), AVG(e.salary)) "
+			+ "FROM Employee e GROUP BY e.department")
+	List<EmployeeStatsDTO> getDepartmentWiseStats();
+
+	@Query("SELECT COUNT(e) FROM Employee e")
+	long getTotalEmployees();
+
+	@Query("SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(e2.salary) FROM Employee e2)")
+	List<Employee> getHighestPaidEmployees();
 }

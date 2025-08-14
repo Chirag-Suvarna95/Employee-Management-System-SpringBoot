@@ -2,6 +2,8 @@ package com.project.EmployeeManagement.services;
 
 import com.project.EmployeeManagement.entities.Employee;
 import com.project.EmployeeManagement.dao.EmployeeRepository;
+import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    
-    
+
     @Override
     public Employee addEmployee(Employee employee) {
         logger.info("Adding new employee: {}", employee.getEmail());
@@ -69,4 +70,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         logger.info("Searching employees by name: {}", name);
         return employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name);
     }
+
+
+	@Override
+	public List<EmployeeStatsDTO> getDepartmentWiseStats() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public long getTotalEmployees() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public List<Employee> getHighestPaidEmployees() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

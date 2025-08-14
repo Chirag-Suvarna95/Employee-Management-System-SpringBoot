@@ -1,5 +1,6 @@
 package com.project.EmployeeManagement.services;
 
+import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
 import com.project.EmployeeManagement.entities.Employee;
 
 import java.util.List;
@@ -22,4 +23,12 @@ public interface EmployeeService {
     List<Employee> findEmployeesByJobTitle(String jobTitle);
 
     List<Employee> searchEmployeesByName(String name);
+    
+    //Methods for Stats
+    List<EmployeeStatsDTO> getDepartmentWiseStats();
+    
+    long getTotalEmployees();
+    
+    List<Employee> getHighestPaidEmployees();
+
 }
