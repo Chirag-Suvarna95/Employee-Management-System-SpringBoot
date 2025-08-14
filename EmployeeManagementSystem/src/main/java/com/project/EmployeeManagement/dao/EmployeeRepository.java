@@ -1,6 +1,7 @@
 package com.project.EmployeeManagement.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -35,4 +36,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	@Query("SELECT e FROM Employee e WHERE e.salary = (SELECT MAX(e2.salary) FROM Employee e2)")
 	List<Employee> getHighestPaidEmployees();
+	
+	Optional<Employee> findByEmailIgnoreCase(String email);
+
 }
