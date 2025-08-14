@@ -56,10 +56,10 @@ public class EmployeeController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
 		if (employeeServiceImpl.getEmployeeById(id).isEmpty()) {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.badRequest().build();
 		}
 		employeeServiceImpl.deleteEmployeeById(id);
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok().build();
 	}
 
 	// Search employees by department
@@ -74,7 +74,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(employeeServiceImpl.findEmployeesByJobTitle(jobTitle));
 	}
 
-	// Search by first or last name (partial, case-insensitive)
+	// Search by first or last name
 	@GetMapping("/search")
 	public ResponseEntity<List<Employee>> searchByName(@RequestParam String name) {
 		return ResponseEntity.ok(employeeServiceImpl.searchEmployeesByName(name));
