@@ -39,7 +39,6 @@ public class EmployeeController {
 	public ResponseEntity<Employee> addEmployee(@RequestBody Employee emp) {
 		Employee savedEmp = employeeServiceImpl.addEmployee(emp);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedEmp);
-
 	}
 
 	// Update existing employee
