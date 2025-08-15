@@ -1,6 +1,7 @@
 package com.project.EmployeeManagement.services;
 
 import com.project.EmployeeManagement.dao.EmployeeRepository;
+import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
 import com.project.EmployeeManagement.entities.Employee;
 import com.project.EmployeeManagement.exceptions.EmailAlreadyExistsException;
 import com.project.EmployeeManagement.exceptions.ResourceNotFoundException;
@@ -11,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -89,6 +91,54 @@ class EmployeeServiceImplTest {
 		verify(employeeRepository).existsById(1L);
 		verify(employeeRepository).deleteById(1L);
 	}
+	
+	
+	//-------Tests for Stats----------------
+	
+	@Test
+	void getDepartmentWiseStats() {
+	    List<EmployeeStatsDTO> stats = new ArrayList<>();
+	    stats.add(new EmployeeStatsDTO("IMF", 5L, 1000000.0));
+	    stats.add(new EmployeeStatsDTO("MI6", 3L, 900000.0));
+
+	    when(employeeRepository.getDepartmentWiseStats()).thenReturn(stats);
+
+	    List<EmployeeStatsDTO> result = employeeService.getDepartmentWiseStats();
+
+	    assertNotNull(result);
+	    assertEquals(2, result.size());
+	    assertEquals("IMF", result.get(0).getDepartment());
+	    assertEquals(5L, result.get(0).getEmployeeCount());
+	    assertEquals(1000000.0, result.get(0).getAverageSalary());
+
+	    verify(employeeRepository).getDepartmentWiseStats();
+	}
+
+	@Test
+	void getTotalEmployees() {
+	    when(employeeRepository.getTotalEmployees()).thenReturn(8L);
+
+	    long total = employeeService.getTotalEmployees();
+
+	    assertEquals(8L, total);
+	    verify(employeeRepository).getTotalEmployees();
+	}
+
+	@Test
+	void getHighestPaidEmployees() {
+	    List<Employee> highestPaid = new ArrayList<>();
+	    highestPaid.add(testEmployee);
+
+	    when(employeeRepository.getHighestPaidEmployees()).thenReturn(highestPaid);
+	    List<Employee> result = employeeService.getHighestPaidEmployees();
+
+	    assertNotNull(result);
+	    assertEquals(1, result.size());
+	    assertEquals(testEmployee.getEmail(), result.get(0).getEmail());
+
+	    verify(employeeRepository).getHighestPaidEmployees();
+	}
+
 
 
 }
