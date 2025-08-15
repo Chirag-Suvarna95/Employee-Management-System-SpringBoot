@@ -89,54 +89,51 @@ class EmployeeServiceImplTest {
 		verify(employeeRepository).existsById(1L);
 		verify(employeeRepository).deleteById(1L);
 	}
-	
-	
-	//-------Tests for Stats----------------
-	
+
+	// -------Tests for Stats----------------
+
 	@Test
 	void getDepartmentWiseStats() {
-	    List<EmployeeStatsDTO> stats = new ArrayList<>();
-	    stats.add(new EmployeeStatsDTO("IMF", 5L, 1000000.0));
-	    stats.add(new EmployeeStatsDTO("MI6", 3L, 900000.0));
+		List<EmployeeStatsDTO> stats = new ArrayList<>();
+		stats.add(new EmployeeStatsDTO("IMF", 5L, 1000000.0));
+		stats.add(new EmployeeStatsDTO("MI6", 3L, 900000.0));
 
-	    when(employeeRepository.getDepartmentWiseStats()).thenReturn(stats);
+		when(employeeRepository.getDepartmentWiseStats()).thenReturn(stats);
 
-	    List<EmployeeStatsDTO> result = employeeService.getDepartmentWiseStats();
+		List<EmployeeStatsDTO> result = employeeService.getDepartmentWiseStats();
 
-	    assertNotNull(result);
-	    assertEquals(2, result.size());
-	    assertEquals("IMF", result.get(0).getDepartment());
-	    assertEquals(5L, result.get(0).getEmployeeCount());
-	    assertEquals(1000000.0, result.get(0).getAverageSalary());
+		assertNotNull(result);
+		assertEquals(2, result.size());
+		assertEquals("IMF", result.get(0).getDepartment());
+		assertEquals(5L, result.get(0).getEmployeeCount());
+		assertEquals(1000000.0, result.get(0).getAverageSalary());
 
-	    verify(employeeRepository).getDepartmentWiseStats();
+		verify(employeeRepository).getDepartmentWiseStats();
 	}
 
 	@Test
 	void getTotalEmployees() {
-	    when(employeeRepository.getTotalEmployees()).thenReturn(8L);
+		when(employeeRepository.getTotalEmployees()).thenReturn(8L);
 
-	    long total = employeeService.getTotalEmployees();
+		long total = employeeService.getTotalEmployees();
 
-	    assertEquals(8L, total);
-	    verify(employeeRepository).getTotalEmployees();
+		assertEquals(8L, total);
+		verify(employeeRepository).getTotalEmployees();
 	}
 
 	@Test
 	void getHighestPaidEmployees() {
-	    List<Employee> highestPaid = new ArrayList<>();
-	    highestPaid.add(testEmployee);
+		List<Employee> highestPaid = new ArrayList<>();
+		highestPaid.add(testEmployee);
 
-	    when(employeeRepository.getHighestPaidEmployees()).thenReturn(highestPaid);
-	    List<Employee> result = employeeService.getHighestPaidEmployees();
+		when(employeeRepository.getHighestPaidEmployees()).thenReturn(highestPaid);
+		List<Employee> result = employeeService.getHighestPaidEmployees();
 
-	    assertNotNull(result);
-	    assertEquals(1, result.size());
-	    assertEquals(testEmployee.getEmail(), result.get(0).getEmail());
+		assertNotNull(result);
+		assertEquals(1, result.size());
+		assertEquals(testEmployee.getEmail(), result.get(0).getEmail());
 
-	    verify(employeeRepository).getHighestPaidEmployees();
+		verify(employeeRepository).getHighestPaidEmployees();
 	}
-
-
 
 }
