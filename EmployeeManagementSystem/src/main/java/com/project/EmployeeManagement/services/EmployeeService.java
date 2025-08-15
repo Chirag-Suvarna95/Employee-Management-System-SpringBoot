@@ -29,5 +29,7 @@ public interface EmployeeService {
     long getTotalEmployees();
     
     List<Employee> getHighestPaidEmployees();
+    
+    List<Employee> getLowestPaidEmployees();
 
 }

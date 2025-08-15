@@ -93,7 +93,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name);
     }
 
-    // Reports methods remain the same
     @Override
     public List<EmployeeStatsDTO> getDepartmentWiseStats() {
         return employeeRepository.getDepartmentWiseStats();
@@ -108,4 +107,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getHighestPaidEmployees() {
         return employeeRepository.getHighestPaidEmployees();
     }
+
+	@Override
+	public List<Employee> getLowestPaidEmployees() {
+		return null;
+	}
+    
+    
 }
