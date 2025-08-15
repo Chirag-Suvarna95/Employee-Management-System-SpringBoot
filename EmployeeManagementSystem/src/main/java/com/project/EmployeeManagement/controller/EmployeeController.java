@@ -68,8 +68,8 @@ public class EmployeeController {
     }
 
     // Search by first or last name
-    @GetMapping("/search")
-    public ResponseEntity<List<Employee>> searchByName(@RequestParam String name) {
+    @GetMapping("/search/{s_name}")
+    public ResponseEntity<List<Employee>> searchByName(@PathVariable("s_name") String name) {
         return ResponseEntity.ok(employeeServiceImpl.searchEmployeesByName(name));
     }
 
