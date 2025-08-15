@@ -114,16 +114,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<Employee> getEmpsWithSalHigherThan() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employee> getEmpsWithSalHigherThan(double amount) {
+		return employeeRepository.getEmpsWithSalHigherThan(amount);
 	}
 
 	@Override
 	public List<Employee> getEmpsWithSalLowerThan() {
-		// TODO Auto-generated method stub
 		return null;
 	}
+
     
     
 }

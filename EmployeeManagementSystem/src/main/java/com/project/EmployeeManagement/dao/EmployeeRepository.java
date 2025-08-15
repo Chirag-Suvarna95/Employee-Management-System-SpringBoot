@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
@@ -40,5 +41,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	
 	@Query("SELECT e from Employee e where e.salary =(select min(e2.salary) from Employee e2)")
 	List<Employee> getLowestPaidEmployee();
+
+	@Query("select e from Employee e where e.salary > :amount")
+	List<Employee> getEmpsWithSalHigherThan(@Param("amount") double amount);
+
 
 }

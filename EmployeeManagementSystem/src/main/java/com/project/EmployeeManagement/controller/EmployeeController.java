@@ -96,4 +96,19 @@ public class EmployeeController {
     {
     	return ResponseEntity.ok(employeeServiceImpl.getLowestPaidEmployees());
     }
+    
+    
+    @GetMapping("/reports/higher-than/{amount}")
+    public ResponseEntity<List<Employee>> getEmpsWithSalHigherThan(@PathVariable double amount )
+    {
+		return ResponseEntity.ok(employeeServiceImpl.getEmpsWithSalHigherThan(amount));
+    	
+    }
+    
+    @GetMapping("/reports/lower-than/{amount}")
+    public ResponseEntity<List<Employee>> getEmpsWithSalLowerThan()
+    {
+		return null;
+    	
+    }
 }
