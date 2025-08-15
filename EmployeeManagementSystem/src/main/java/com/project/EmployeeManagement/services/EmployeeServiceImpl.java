@@ -112,6 +112,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> getLowestPaidEmployees() {
 		return employeeRepository.getLowestPaidEmployee();
 	}
+
+	@Override
+	public List<Employee> getEmpsWithSalHigherThan() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> getEmpsWithSalLowerThan() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
 }

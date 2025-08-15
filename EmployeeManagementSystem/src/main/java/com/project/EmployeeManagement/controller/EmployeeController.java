@@ -1,5 +1,6 @@
 package com.project.EmployeeManagement.controller;
 
+import java.lang.annotation.Repeatable;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -88,5 +89,11 @@ public class EmployeeController {
     @GetMapping("/reports/highest-salary")
     public ResponseEntity<List<Employee>> getHighestSalaryEmployees() {
         return ResponseEntity.ok(employeeServiceImpl.getHighestPaidEmployees());
+    }
+    
+    @GetMapping("/reports/lowest-salary")
+    public ResponseEntity<List<Employee>> getLowestPaidEmployee()
+    {
+    	return ResponseEntity.ok(employeeServiceImpl.getLowestPaidEmployees());
     }
 }

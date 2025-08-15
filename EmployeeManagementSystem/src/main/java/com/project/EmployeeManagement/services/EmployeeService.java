@@ -31,5 +31,11 @@ public interface EmployeeService {
     List<Employee> getHighestPaidEmployees();
     
     List<Employee> getLowestPaidEmployees();
+    
+    List<Employee> getEmpsWithSalHigherThan();
+    
+    List<Employee> getEmpsWithSalLowerThan();
+    
+    
 
 }
