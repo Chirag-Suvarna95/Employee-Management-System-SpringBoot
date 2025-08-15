@@ -3,8 +3,6 @@ package com.project.EmployeeManagement.services;
 import com.project.EmployeeManagement.dao.EmployeeRepository;
 import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
 import com.project.EmployeeManagement.entities.Employee;
-import com.project.EmployeeManagement.exceptions.EmailAlreadyExistsException;
-import com.project.EmployeeManagement.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
