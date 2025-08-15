@@ -4,7 +4,6 @@ import com.project.EmployeeManagement.dto.EmployeeStatsDTO;
 import com.project.EmployeeManagement.entities.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EmployeeService {
 

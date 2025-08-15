@@ -26,7 +26,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	List<Employee> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName);
 
 	
-	//need full class name for constructor
 	@Query("SELECT new com.project.EmployeeManagement.dto.EmployeeStatsDTO(e.department, COUNT(e), AVG(e.salary)) "
 			+ "FROM Employee e GROUP BY e.department")
 	List<EmployeeStatsDTO> getDepartmentWiseStats();
