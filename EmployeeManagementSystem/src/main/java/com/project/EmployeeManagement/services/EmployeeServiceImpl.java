@@ -110,7 +110,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> getLowestPaidEmployees() {
-		return null;
+		return employeeRepository.getLowestPaidEmployee();
 	}
     
     
