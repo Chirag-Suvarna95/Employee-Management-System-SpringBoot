@@ -19,26 +19,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(EmployeeController.class)
 class EmployeeControllerIntegrationTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @MockitoBean
-    private EmployeeServiceImpl employeeService;
+	@MockitoBean
+	private EmployeeServiceImpl employeeService;
 
-    @Test
-    @WithMockUser(roles = {"ADMIN"})
-    void getAllEmployees() throws Exception {
-        Employee emp = new Employee();
-        emp.setId(1L);
-        emp.setFirstName("Admin");
-        emp.setLastName("1");
-        emp.setEmail("HelloThere.IAmYourBoss@GetBackToWork.com");
+	@Test
+	@WithMockUser(roles = { "ADMIN" })
+	void getAllEmployees() throws Exception {
+		Employee emp = new Employee();
+		emp.setId(1L);
+		emp.setFirstName("Admin");
+		emp.setLastName("1");
+		emp.setEmail("HelloThere.IAmYourBoss@GetBackToWork.com");
 
-        when(employeeService.getAllEmployees()).thenReturn(Arrays.asList(emp));
+		when(employeeService.getAllEmployees()).thenReturn(Arrays.asList(emp));
 
-        mockMvc.perform(get("/employees")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].email").value("HelloThere.IAmYourBoss@GetBackToWork.com"));
-    }
+		mockMvc.perform(get("/employees").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].email").value("HelloThere.IAmYourBoss@GetBackToWork.com"));
+	}
 }
