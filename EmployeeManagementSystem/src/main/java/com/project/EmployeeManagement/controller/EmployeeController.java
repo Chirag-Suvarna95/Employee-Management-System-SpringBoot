@@ -106,9 +106,9 @@ public class EmployeeController {
     }
     
     @GetMapping("/reports/lower-than/{amount}")
-    public ResponseEntity<List<Employee>> getEmpsWithSalLowerThan()
+    public ResponseEntity<List<Employee>> getEmpsWithSalLowerThan(@PathVariable double amount)
     {
-		return null;
+		return ResponseEntity.ok(employeeServiceImpl.getEmpsWithSalLowerThan(amount));
     	
     }
 }

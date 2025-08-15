@@ -119,8 +119,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<Employee> getEmpsWithSalLowerThan() {
-		return null;
+	public List<Employee> getEmpsWithSalLowerThan(double amount) {
+		return employeeRepository.getEmpWithSalLowerThan(amount);
 	}
 
     

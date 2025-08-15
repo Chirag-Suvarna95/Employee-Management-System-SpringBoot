@@ -33,7 +33,7 @@ public interface EmployeeService {
     List<Employee> getLowestPaidEmployees();
     
     List<Employee> getEmpsWithSalHigherThan(double amount);
-    List<Employee> getEmpsWithSalLowerThan();
+	List<Employee> getEmpsWithSalLowerThan(double amount);
 
 	
     
