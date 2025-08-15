@@ -37,5 +37,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	List<Employee> getHighestPaidEmployees();
 	
 	Optional<Employee> findByEmailIgnoreCase(String email);
+	
+	@Query("SELECT e from Employee e where e.salary =(select min(e2.salary) from Employee e2)")
+	List<Employee> getLowestPaidEmployee();
 
 }
