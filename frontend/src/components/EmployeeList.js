@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import employeeService from '../services/employeeService';
+import AdvancedSearch from './AdvancedSearch'; // Add this import
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isAdvancedSearch, setIsAdvancedSearch] = useState(false); // Add this state
 
   useEffect(() => {
     loadEmployees();
@@ -17,6 +19,7 @@ const EmployeeList = () => {
       const response = await employeeService.getAllEmployees();
       setEmployees(response.data);
       setError('');
+      setIsAdvancedSearch(false); // Reset advanced search flag
     } catch (error) {
       setError('Failed to load employees');
       console.error('Error loading employees:', error);
@@ -41,12 +44,19 @@ const EmployeeList = () => {
       try {
         const response = await employeeService.searchEmployees(searchTerm);
         setEmployees(response.data);
+        setIsAdvancedSearch(false);
       } catch (error) {
         setError('Search failed');
       }
     } else {
       loadEmployees();
     }
+  };
+
+  // Add this function to handle advanced search results
+  const handleAdvancedSearchResults = (results) => {
+    setEmployees(results);
+    setIsAdvancedSearch(true);
   };
 
   if (loading) {
@@ -68,6 +78,7 @@ const EmployeeList = () => {
         </div>
       )}
 
+      {/* Basic Search */}
       <form onSubmit={handleSearch} className="mb-3">
         <div className="row">
           <div className="col-md-8">
@@ -96,6 +107,16 @@ const EmployeeList = () => {
           </div>
         </div>
       </form>
+
+      {/* Add Advanced Search Component */}
+      <AdvancedSearch onSearchResults={handleAdvancedSearchResults} />
+
+      {/* Results Summary */}
+      {isAdvancedSearch && (
+        <div className="alert alert-info">
+          Advanced search results: {employees.length} employee(s) found
+        </div>
+      )}
 
       <div className="table-responsive">
         <table className="table table-striped">
