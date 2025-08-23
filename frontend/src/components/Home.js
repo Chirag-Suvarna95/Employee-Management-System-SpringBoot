@@ -43,11 +43,9 @@ const Home = () => {
           <div className="card bg-primary text-white">
             <div className="card-body">
               <h1 className="card-title mb-2">
-                {greeting}, {getUsername()}! 👋
+                {greeting}, {getUsername()}! 
               </h1>
-              <p className="card-text mb-0">
-                Welcome to the Employee Management System. Manage your workforce efficiently.
-              </p>
+            
             </div>
           </div>
         </div>
