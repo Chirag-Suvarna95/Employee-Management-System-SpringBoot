@@ -26,7 +26,59 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeServiceImpl.getAllEmployees());
     }
 
-    // Get employee by id 
+
+    // Search by first or last name - MOVED UP
+    @GetMapping("/search")
+    public ResponseEntity<List<Employee>> searchByName(@RequestParam String name) {
+        return ResponseEntity.ok(employeeServiceImpl.searchEmployeesByName(name));
+    }
+
+    // Search employees by department - MOVED UP
+    @GetMapping("/department/{department}")
+    public ResponseEntity<List<Employee>> getByDepartment(@PathVariable String department) {
+        return ResponseEntity.ok(employeeServiceImpl.findEmployeesByDepartment(department));
+    }
+
+    // Search employees by job title - MOVED UP  
+    @GetMapping("/job/{jobTitle}")
+    public ResponseEntity<List<Employee>> getByJobTitle(@PathVariable String jobTitle) {
+        return ResponseEntity.ok(employeeServiceImpl.findEmployeesByJobTitle(jobTitle));
+    }
+
+    // Reports endpoints 
+    @GetMapping("/reports/department-stats")
+    public ResponseEntity<List<EmployeeStatsDTO>> getDepartmentStats() {
+        return ResponseEntity.ok(employeeServiceImpl.getDepartmentWiseStats());
+    }
+
+    @GetMapping("/reports/total")
+    public ResponseEntity<Long> getTotalEmployees() {
+        return ResponseEntity.ok(employeeServiceImpl.getTotalEmployees());
+    }
+
+    @GetMapping("/reports/highest-salary")
+    public ResponseEntity<List<Employee>> getHighestSalaryEmployees() {
+        return ResponseEntity.ok(employeeServiceImpl.getHighestPaidEmployees());
+    }
+    
+    @GetMapping("/reports/lowest-salary")
+    public ResponseEntity<List<Employee>> getLowestPaidEmployee() {
+        return ResponseEntity.ok(employeeServiceImpl.getLowestPaidEmployees());
+    }
+    
+    @GetMapping("/reports/higher-than/{amount}")
+    public ResponseEntity<List<Employee>> getEmpsWithSalHigherThan(@PathVariable double amount) {
+        return ResponseEntity.ok(employeeServiceImpl.getEmpsWithSalHigherThan(amount));
+    }
+    
+    @GetMapping("/reports/lower-than/{amount}")
+    public ResponseEntity<List<Employee>> getEmpsWithSalLowerThan(@PathVariable double amount) {
+        return ResponseEntity.ok(employeeServiceImpl.getEmpsWithSalLowerThan(amount));
+    }
+
+    // *** GENERIC {id} ROUTE COMES LAST ***
+
+    // Get employee by id - MOVED TO END
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
         Employee employee = employeeServiceImpl.getEmployeeById(id);
@@ -53,61 +105,5 @@ public class EmployeeController {
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         employeeServiceImpl.deleteEmployeeById(id);
         return ResponseEntity.noContent().build();
-    }
-
-    // Search employees by department
-    @GetMapping("/department/{department}")
-    public ResponseEntity<List<Employee>> getByDepartment(@PathVariable String department) {
-        return ResponseEntity.ok(employeeServiceImpl.findEmployeesByDepartment(department));
-    }
-
-    // Search employees by job title
-    @GetMapping("/job/{jobTitle}")
-    public ResponseEntity<List<Employee>> getByJobTitle(@PathVariable String jobTitle) {
-        return ResponseEntity.ok(employeeServiceImpl.findEmployeesByJobTitle(jobTitle));
-    }
-
-    // Search by first or last name
-    @GetMapping("/search/{s_name}")
-    public ResponseEntity<List<Employee>> searchByName(@PathVariable("s_name") String name) {
-        return ResponseEntity.ok(employeeServiceImpl.searchEmployeesByName(name));
-    }
-
-    // reports
-
-    @GetMapping("/reports/department-stats")
-    public ResponseEntity<List<EmployeeStatsDTO>> getDepartmentStats() {
-        return ResponseEntity.ok(employeeServiceImpl.getDepartmentWiseStats());
-    }
-
-    @GetMapping("/reports/total")
-    public ResponseEntity<Long> getTotalEmployees() {
-        return ResponseEntity.ok(employeeServiceImpl.getTotalEmployees());
-    }
-
-    @GetMapping("/reports/highest-salary")
-    public ResponseEntity<List<Employee>> getHighestSalaryEmployees() {
-        return ResponseEntity.ok(employeeServiceImpl.getHighestPaidEmployees());
-    }
-    
-    @GetMapping("/reports/lowest-salary")
-    public ResponseEntity<List<Employee>> getLowestPaidEmployee()
-    {
-    	return ResponseEntity.ok(employeeServiceImpl.getLowestPaidEmployees());
-    }
-    
-    
-    @GetMapping("/reports/higher-than/{amount}")
-    public ResponseEntity<List<Employee>> getEmpsWithSalHigherThan(@PathVariable double amount )
-    {
-		return ResponseEntity.ok(employeeServiceImpl.getEmpsWithSalHigherThan(amount));
-    	
-    }
-    
-    @GetMapping("/reports/lower-than/{amount}")
-    public ResponseEntity<List<Employee>> getEmpsWithSalLowerThan(@PathVariable double amount)
-    {
-		return ResponseEntity.ok(employeeServiceImpl.getEmpsWithSalLowerThan(amount));
-    	
     }
 }
