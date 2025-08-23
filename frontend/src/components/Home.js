@@ -43,8 +43,9 @@ const Home = () => {
           <div className="card bg-primary text-white">
             <div className="card-body">
               <h1 className="card-title mb-2">
-                {greeting}, {getUsername()}! 
-              </h1>
+                {greeting}, {getUsername()}!  
+              </h1>   
+              
             
             </div>
           </div>
